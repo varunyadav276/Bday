@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday! ❤️</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.jsdelivr.net/shapes/tailwind.css"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Confetti Library for the cake click -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/input.min.js"></script>
+  <style>
+    /* Custom simple animations */
+    .pulse-slow { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .bounce-slow { animation: bounce 3s infinite; }
+    
+    /* Smooth zoom out transitions */
+    .zoom-out-active {
+      transform: scale(0.5);
+      opacity: 0;
+      transition: all 1.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-pink-50 text-gray-800 overflow-hidden font-sans h-screen w-screen select-none">
+
+  <!-- ================= SCREEN 1: THE PLAY BUTTON ================= -->
+  <div id="screen-play" class="fixed inset-0 flex flex-col items-center justify-center bg-pink-100 px-6 z-50 transition-opacity duration-500">
+    <h1 class="text-3xl font-bold text-pink-600 mb-8 text-center">Hey beautiful, I made something for you...</h1>
+    <button id="btn-start" class="w-24 h-24 bg-pink-500 text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform pulse-slow">
+      <!-- Play Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 fill-current ml-2" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ================= SCREEN 2: THE CANDLE COUNTDOWN ================= -->
+  <div id="screen-candle" class="fixed inset-0 hidden flex flex-col items-center justify-center bg-zinc-900 text-white z-40 transition-all duration-1000">
+    <!-- The Candle Container -->
+    <div id="candle-box" class="flex flex-col items-center transition-all duration-1000">
+      <!-- Flame -->
+      <div class="w-6 h-8 bg-amber-400 rounded-full blur-[2px] animate-pulse mb-1"></div>
+      <!-- Wick -->
+      <div class="w-1 h-3 bg-gray-400"></div>
+      <!-- Candle Body -->
+      <div class="w-8 h-28 bg-pink-400 rounded-t-sm shadow-inner"></div>
+    </div>
+    <!-- Countdown Text -->
+    <h2 id="countdown-text" class="text-4xl font-extrabold text-amber-400 mt-12 tracking-wider">BLOW IN 3...</h2>
+  </div>
+
+  <!-- ================= SCREEN 3: STICKMAN & CAKE ================= -->
+  <div id="screen-cake" class="fixed inset-0 hidden flex flex-col items-center justify-center bg-pink-100 p-6 z-30">
+    
+    <!-- Stickman + Head Animation Area -->
+    <div class="relative w-64 h-64 mb-6 flex items-center justify-center">
+      <!-- Your Face Cropped (Stickman Head) -->
+      <!-- Replace with your cropped face image path later -->
+      <div class="absolute top-4 w-20 h-20 rounded-full border-4 border-white shadow-md overflow-hidden z-10 bounce-slow">
+        <img src="https://via.placeholder.com/150" alt="Your Face" class="w-full h-full object-cover">
+      </div>
+      
+      <!-- Stickman Body Drawing (Simple SVG) -->
+      <svg class="w-full h-full" viewBox="0 0 200 200" fill="none" stroke="#333" stroke-width="6" stroke-linecap="round">
+        <!-- Spine/Body -->
+        <line x1="100" y1="85" x2="100" y2="140" />
+        <!-- Legs -->
+        <line x1="100" y1="140" x2="70" y2="190" />
+        <line x1="100" y1="140" x2="130" y2="190" />
+        <!-- Arms holding the cake forward -->
+        <path d="M 100 100 Q 60 110 80 130" />
+        <path d="M 100 100 Q 140 110 120 130" />
+      </svg>
+    </div>
+
+    <!-- The Interactive Cake -->
+    <button id="cake-clickable" class="active:scale-95 transition-transform duration-200 focus:outline-none">
+      <div class="text-7xl bounce-slow">🎂</div>
+    </button>
+
+    <!-- Instructional Text -->
+    <p id="cake-instruction" class="text-pink-600 font-bold text-xl mt-6 animate-pulse opacity-0 transition-opacity duration-1000">
+      Tap the cake to make a wish! ✨
+    </p>
+  </div>
+
+</body>
+</html>
+
